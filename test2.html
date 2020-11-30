@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html style="font-size: 24px">
+<head>
+    <title>js点击按钮显示再点击空白地方隐藏</title>
+    <style type="text/css">
+        #div {
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+            font-size: 2rem
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="show()">点击我</button>
+    <div id="div">这是div的内容</div>
+<script type="text/javascript">
+    function show (event) {
+        //取消冒泡
+        let oevent = event || window.event
+        if (document.all) {
+            oevent.cancelBubble = true
+        } else {
+            oevent.stopPropagation()
+        }
+        if (document.getElementById('div').style.display === 'none' || document.getElementById('div').style.display === '') {
+            document.getElementById('div').style.display = 'block'
+        } else {
+            document.getElementById('div').style.display = 'none'
+        }
+    }
+    document.onclick = function () {
+        document.getElementById('div').style.display = 'none'
+    }
+    document.getElementById('div').onclick = function (event) {
+        let oevent = event || window.event
+        oevent.stopPropagation()
+    }
+    
+</script>
+</body>
+</html>
